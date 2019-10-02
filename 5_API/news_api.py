@@ -23,8 +23,8 @@ def params_unique_combination(baseurl, params):
     alphabetized_keys = sorted(params.keys())
     res = []
     for k in alphabetized_keys:
-        res.append("{}-{}".format(k, params[k]))
-    return baseurl + "_" + "_".join(res)
+        res.append("{}={}".format(k, params[k]))
+    return baseurl + "?" + "&".join(res)
 
 def make_request_using_cache(baseurl, params):
     
