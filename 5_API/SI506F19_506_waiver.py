@@ -54,7 +54,7 @@ print("\n***** PROBLEM 2 *****\n")
 ## https://www.flickr.com/services/api/misc.api_keys.html
 ## to get a key for the Flickr API, so that you can get data from Flickr and paste it below, inside the quotes.
 
-FLICKR_KEY = "96f96eb6aa17efff6e78768e2d4e3913" # paste your flickr API key here, between those quotation marks, such that the variable flickr_key will contain a string.
+FLICKR_KEY = "" # paste your flickr API key here, between those quotation marks, such that the variable flickr_key will contain a string.
 
 
 ## DO NOT CHANGE ANYTHING ELSE ABOUT THE CODE HERE IN THIS PROBLEM 2.
