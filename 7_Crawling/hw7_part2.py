@@ -9,7 +9,6 @@ try:
     data = json.loads(data_contents)
     data_file.close()
 
-# if there was no file, no worries. There will be soon!
 except:
     print('Missing data file "directory_dict.json".')
     data = {}
