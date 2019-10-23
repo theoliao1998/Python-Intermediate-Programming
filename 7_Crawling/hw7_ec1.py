@@ -1,4 +1,3 @@
-# 507 Homework 7 Part 1
 import requests
 import json
 from bs4 import BeautifulSoup
