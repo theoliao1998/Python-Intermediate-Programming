@@ -82,7 +82,7 @@ def insert_bars_data():
     # if table is not empty, we don't need to insert
     if len(cur.execute('SELECT * FROM "Bars" LIMIT 1').fetchall()): return
     
-    with open(BARSCSV, "r") as content:
+    with open(BARSCSV, "r", encoding='utf-8') as content:
         bars_data = csv.reader(content)
         next(bars_data) # skip header
         for row in bars_data:
