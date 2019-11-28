@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+      {% if name %}
+      <h1>Hello, {{ name }}!</h1>
+      {% endif %}
+      <h2>Today's top headers in {{ category }} are...</h2>
+      <ol>
+        {% for n in news %}
+        <li>{{ n.title }} (<a href="{{ n.url }}">{{ n.url }}</a>)</li>
+        {% endfor %}  
+      </ol>
+  </body>
+</html>
