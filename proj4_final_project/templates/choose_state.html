@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block style %}
+<style type="text/css">
+    /*fieldset{
+      width: 45%;
+      display: inline-block;
+    }*/
+    form{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-row-gap: 20px;
+    }
+    input[type="submit"]{
+      width: 25%;
+      min-height: 5vh;
+      grid-row-gap: 20px;
+      justify-self:center;
+      border: 3px solid green;
+      grid-column: 1 / span 2;
+      font-size: 200%;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+
+{% if terminal %}
+<h1>Choose the state of your terminal point</h1>
+{% else %}
+<h1>Choose the state of your starting point</h1>
+{% endif %}
+<h2>(Insular areas not included)</h2>
+<form action="" id="form">
+        <fieldset>
+          <div>
+            <br>
+            {% for state in states_left %}
+            <label>
+              <input type="radio" name ="state" value = "{{ state }}" id="freshman">
+              <a href="/state/{{state}}/map" target="_blank">{{ state }}</a>
+            </label><br>
+            {% endfor %}
+        </div>
+    </fieldset>
+    <fieldset>
+        <div>
+            <br>
+            {% for state in states_right %}
+            <label>
+              <input type="radio" name ="state" value = "{{ state }}" id="freshman">
+              <a href="/state/{{state}}/map" target="_blank">{{ state }}</a>
+            </label><br>
+            {% endfor %}
+        </div>
+    </fieldset>
+    <input type="submit" value="Next">
+    </form>
+
+{% endblock %}
+
+{% block script %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+function change_action(){
+    {% if terminal %}
+    $("#form")[0]["action"] = "/airport1/{{ airport1 }}/state_2/"+ $('input[name="state"]:checked').val();
+    {% else %}
+    $("#form")[0]["action"] = "/state/"+ $('input[name="state"]:checked').val();
+    {% endif %}
+}
+
+$('input[name="state"]').click(change_action);
+
+</script>
+{% endblock %}

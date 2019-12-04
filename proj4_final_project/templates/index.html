@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Welcome to Flight Insight!</h1>
+<div>Analyzing your flight plan based on searches of users of sites Aviasales.ru and Jetradar.com for the last 48 hours.</div>
+  <br>
+  <form action="/choose_state">
+      <input type="submit" value="Start!" />
+  </form>
+
+{% endblock %}

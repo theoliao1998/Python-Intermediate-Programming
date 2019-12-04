@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block style %}
+<style type="text/css">
+    .radiotext {
+      margin: 10px 10px 10px 0px;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+
+
+<h1>Search flight data</h1>
+<div>Your current chosen route is from <strong>{{ name1 }}</strong> to <strong>{{ name2 }}</strong>.</div>
+<div>Have an insight about the flight route based on users' searching data in recent 48 hours.</div>
+<form action="" id="form" method="POST">
+        <span>Choose present month or a month in the future</span>
+        <input type="month" name="month" value="{{ month }}">
+        <span> Order by </span>
+        <input type="text" name="order" list="orderby" value="{{ order }}">
+          <datalist id="orderby">
+          <option value="price">
+          <option value="date">
+          <option value="duration">
+          <option value="transfers">
+          <option value="trip_class">
+        </datalist>
+<input type="submit" value="Search">
+</form>
+
+<a href="/">Another search</a>
+&nbsp;&nbsp;&nbsp;
+{% if month %}
+<a href="/airport1/{{airport1}}/airport2/{{airport2}}/month/{{month}}/price" target="_blank">Price Trending</a>
+&nbsp;&nbsp;&nbsp;
+<a href="/airport1/{{airport1}}/airport2/{{airport2}}/month/{{month}}/popularity" target="_blank">Popularity Trending</a>
+{% endif %}
+
+<table class="table table-responsive">
+    <thead>
+        <tr>
+            <th>Price (USD)</th>
+            <th>Departure date </th>
+            <th>Duration (min)</th>
+            <th>Transfers</th>
+            <th>Trip Class</th>
+        </tr>
+    </thead>
+    <tbody>
+    
+        {% for d in data %}
+        <tr>
+            <td>
+                <div>
+                    {{ d[1] }}
+                </div>
+            </td>
+            <td>
+            <div>
+                {{ d[2] }}
+            </div>
+            </td>
+            <td>
+                <div>
+                    {{ d[3] }}
+                </div>
+            </td>
+            <td>
+                <div>
+                    {{ d[4] }}
+                </div>
+            </td>
+            <td>
+                <div>
+                    {{ d[0] }}
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+
+        
+        </tbody>
+</table>
+
+
+{% endblock %}
+
+{% block script %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>  -->
+<script>
+function change_action(){
+    {% if terminal %}
+    $("#form")[0]["action"] = "/airport1/{{ airport1 }}/airport2/"+ $('input[name="optradio"]:checked').attr('id');
+    {% else %}
+    $("#form")[0]["action"] = "/airport1/"+ $('input[name="optradio"]:checked').attr('id')+"/choose_state_2";
+    {% endif %}
+}
+
+$('input[name="optradio"]').click(change_action);
+
+</script>
+{% endblock %}

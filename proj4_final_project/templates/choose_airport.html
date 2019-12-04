@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block style %}
+<style type="text/css">
+    .radiotext {
+      margin: 10px 10px 10px 0px;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+
+{% if terminal %}
+<h1>Choose an airport in {{ state }} as your terminal point</h1>
+{% else %}
+<h1>Choose an airport in {{ state }} as your starting point</h1>
+{% endif %}
+<form action="" id="form">
+<table class="table table-responsive">
+    <thead>
+        <tr>
+            <th>IATA Code</th>
+            <th>Airport Name (Click to see the map)</th>
+            <th>City</th>
+        </tr>
+    </thead>
+    <tbody>
+    
+        {% for airport in airports %}
+        <tr>
+            <td>
+                <div class="radio">
+                    <label><input type="radio" id='{{ airport[1] }}' name="optradio">{{ airport[1] }}</label>
+                </div>
+            </td>
+            <td>
+            <div class="radiotext">
+                <label for='{{ airport[1] }}'><a href='/airport/{{ airport[1] }}' target="_blank">{{ airport[2] }}</a></label>
+            </div>
+            </td>
+            <td>
+                <div class="radiotext">
+                    <label for='{{ airport[1] }}'>{{ airport[0] }}</label>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+
+        
+        </tbody>
+</table>
+<input type="submit" value="Next">
+</form>
+
+
+{% endblock %}
+
+{% block script %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>  -->
+<script>
+function change_action(){
+    {% if terminal %}
+    $("#form")[0]["action"] = "/airport1/{{ airport1 }}/airport2/"+ $('input[name="optradio"]:checked').attr('id');
+    {% else %}
+    $("#form")[0]["action"] = "/airport1/"+ $('input[name="optradio"]:checked').attr('id')+"/choose_state_2";
+    {% endif %}
+}
+
+$('input[name="optradio"]').click(change_action);
+
+</script>
+{% endblock %}
